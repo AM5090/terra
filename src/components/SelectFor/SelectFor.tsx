@@ -8,24 +8,28 @@ interface ISelectProps {
     selectList: DirectionsItem[];
 }
 
-export function SelectFor({selectList}: ISelectProps) {
+export function SelectFor() {
 
     const directions = useaAppSelector(state => state.directions.directions);
-    const [value, setValue] = useState(selectList[0].name);
+    const [value, setValue] = useState('');
     const dispath = useAppDispatch();
 
     useEffect(() => {
-        dispath(updateSearchValue(value));
-    }, [value])
+        if(directions.length) {
+            setValue(directions[0].name);
+            dispath(updateSearchValue(directions[0].name));
+        }
+    }, [directions]);
 
     function handleSelect(event: ChangeEvent<HTMLSelectElement>) {
         setValue(event.target.value);
-    }
+        dispath(updateSearchValue(event.target.value));
+    };
 
     return (
         <>
         <select value={value} onChange={handleSelect}>
-            {selectList.map((item) => (
+            {directions.length && directions.map((item) => (
                 <option key={item.code}>{item.name}</option>
             ))}
         </select>

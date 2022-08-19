@@ -8,23 +8,18 @@ import './Layout.scss';
 
 export function Layout() {
 
-    const directions = useaAppSelector(state => state.directions.directions);
     const filter = useaAppSelector(state => state.filter.filter);
     const seachValue = useaAppSelector(state => state.searchValue.searchValue);
-    const [newArr, setNewArr] = useState<FilterItem[] | undefined>([]);
-
-    useEffect(() => {
-        setNewArr(findArr(seachValue, filter));
-    }, [filter, seachValue]);
+    
 
 
     return (
         <div className="layout">
-            {directions.length && <SelectFor selectList={directions} />}
+            <SelectFor />
             <br/>
             <br/>
             <br/>
-            {newArr?.length && <SelectTo selectList={newArr} />}
+            <SelectTo />
             {/*<div>
                 {filter.map((item) => (
                     <div key={item.from.code}>

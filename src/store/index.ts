@@ -3,6 +3,7 @@ import categoriesReducer from './categoriesSlice';
 import directionsReducer from './directionsSlice';
 import filterReducer from './filterSlice';
 import searchValueReducer from './searchValueSlice';
+import toArrReducer from './toArrSlice';
 
 const store = configureStore({
     reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
         directions: directionsReducer,
         filter: filterReducer,
         searchValue: searchValueReducer,
+        toArr: toArrReducer,
     }
 })
 
