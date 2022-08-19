@@ -1,19 +1,20 @@
-import { ChangeEvent, FormEvent, SelectHTMLAttributes, SetStateAction, useState } from 'react';
-import { DirectionsItem } from '../../store/directionsSlice';
-import './Select.scss';
+import { ChangeEvent, useEffect, useState } from "react";
+import { FilterItem } from "../../store/filterSlice"
 
-interface ISelectProps {
-    selectList: DirectionsItem[];
-    onDispatch?: (value: string) => void;
+interface ISelectPops {
+    selectList: FilterItem[]
 }
 
-export function Select({selectList, onDispatch}: ISelectProps) {
+export function SelectTo({selectList}: ISelectPops) {
 
     const [value, setValue] = useState(selectList[0].name);
 
+    useEffect(() => {
+        setValue(selectList[0].name);
+    }, [])
+
     function handleSelect(event: ChangeEvent<HTMLSelectElement>) {
         setValue(event.target.value);
-        onDispatch?.(value);
     }
 
     return (
@@ -23,8 +24,6 @@ export function Select({selectList, onDispatch}: ISelectProps) {
                 <option key={item.code}>{item.name}</option>
             ))}
         </select>
-        <br/>
-        <br/>
         <br/>
         <div>
            {value} 
