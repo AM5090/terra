@@ -20,19 +20,7 @@ export function Layout() {
             <br/>
             <br/>
             <SelectTo />
-            {/*<div>
-                {filter.map((item) => (
-                    <div key={item.from.code}>
-                        <div>{item.from.name}</div>
-                        <br/>
-                        <div>{item.to.map((item) => (
-                            <div key={item.code}>{item.name}</div>
-                        ))}</div>
-                        <hr/>
-                        <br/>
-                    </div>
-                ))}
-            </div>*/}
         </div>
+        
     )
 }

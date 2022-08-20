@@ -1,12 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { FilterItem } from "../../store/filterSlice"
 import { useaAppSelector, useAppDispatch } from "../../store/hook";
 import { updateToArr } from "../../store/toArrSlice";
 import {findArr} from '../../utils/findArr';
-
-interface ISelectPops {
-    selectList: FilterItem[]
-}
+import { FilterButtons } from "../FilterButtons";
 
 export function SelectTo() {
 
@@ -34,6 +30,8 @@ export function SelectTo() {
 
     return (
         <>
+        <FilterButtons/>
+        <br/>
         <select value={value} onChange={handleSelect}>
             {toArr?.length && toArr.map((item) => (
                 <option key={item.code}>{item.name}</option>

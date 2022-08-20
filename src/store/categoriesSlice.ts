@@ -1,15 +1,38 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+interface CategoriesItem {
+    categoryName: string,
+    categoryId: string,
+    categoryType: [] | string[],
+}
+
 interface CategoriesType {
-    cryptocurrencies: string[];
-    banks: string[];
-    cash: string[];
+    categories: CategoriesItem[],
 }
 
 const initialState: CategoriesType = {
-    cryptocurrencies: ['BTC', 'ETH', 'USDTTRC'],
-    banks: ['ACRUB', 'SBERRUB', 'TCSBRUB'],
-    cash: ['CASHUSD', 'CASHRUB'],
+    categories: [
+        {
+            categoryName: 'Все',
+            categoryId: 'All',
+            categoryType: [],
+        },
+        {
+            categoryName: 'Криптовалюты',
+            categoryId: 'Cryptocurrencies',
+            categoryType: ['BTC', 'ETH', 'USDTTRC'],
+        },
+        {
+            categoryName: 'Банки',
+            categoryId: 'Banks',
+            categoryType: ['ACRUB', 'SBERRUB', 'TCSBRUB'],
+        },
+        {
+            categoryName: 'Наличные',
+            categoryId: 'Cash',
+            categoryType: ['CASHUSD', 'CASHRUB'],
+        }
+    ]
 }
 
 const categoriesSlice = createSlice({

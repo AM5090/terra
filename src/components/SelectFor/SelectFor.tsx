@@ -1,12 +1,8 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import { DirectionsItem } from '../../store/directionsSlice';
 import { useaAppSelector, useAppDispatch } from '../../store/hook';
 import { updateSearchValue } from '../../store/searchValueSlice';
+import { FilterButtons } from '../FilterButtons';
 import './SelectFor.scss';
-
-interface ISelectProps {
-    selectList: DirectionsItem[];
-}
 
 export function SelectFor() {
 
@@ -28,6 +24,8 @@ export function SelectFor() {
 
     return (
         <>
+        <FilterButtons/>
+        <br/>
         <select value={value} onChange={handleSelect}>
             {directions.length && directions.map((item) => (
                 <option key={item.code}>{item.name}</option>

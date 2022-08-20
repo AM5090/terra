@@ -1,11 +1,9 @@
 import { useEffect } from 'react';
-import logo from './logo.svg';
 import './App.scss';
 import { useAppDispatch } from './store/hook';
 import { directionsFetch } from './store/directionsSlice';
 import { Layout } from './components/Layout';
 import { filterFetch } from './store/filterSlice';
-import { findArr } from './utils/findArr';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -19,9 +17,9 @@ function App() {
   
 
   return (
-    <div className="App">
-      <Layout/>
-    </div>
+      <div className="App">
+        <Layout/>
+      </div>
   );
 }
 
