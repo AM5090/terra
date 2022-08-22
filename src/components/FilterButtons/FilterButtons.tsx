@@ -3,7 +3,11 @@ import { useaAppSelector } from '../../store/hook';
 import { FilterButtonItem } from './FilterButtonItem/FilterButtonItem';
 import './FilterButtons.scss';
 
-export function FilterButtons() {
+interface IFilterButtonsProps {
+    filteringValues: (value: string[]) => void;
+}
+
+export function FilterButtons({filteringValues}: IFilterButtonsProps) {
 
     const categories = useaAppSelector(state => state.categories.categories);
     const [activButton, setActivButton] = useState(categories[0].categoryId);
@@ -17,6 +21,7 @@ export function FilterButtons() {
                     id={item.categoryId}
                     active={activButton}
                     setActive={setActivButton}
+                    filteringValues={filteringValues}
                 />
             ))}
         </div>

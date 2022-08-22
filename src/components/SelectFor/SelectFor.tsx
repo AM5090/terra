@@ -1,33 +1,47 @@
 import { ChangeEvent, useEffect, useState } from 'react';
+import { updateMainFilteredArray, updateMainFilteringValues } from '../../store/directionsSlice';
 import { useaAppSelector, useAppDispatch } from '../../store/hook';
 import { updateSearchValue } from '../../store/searchValueSlice';
+import { arrayFiltering } from '../../utils/arrayFiltering';
 import { FilterButtons } from '../FilterButtons';
 import './SelectFor.scss';
 
 export function SelectFor() {
 
     const directions = useaAppSelector(state => state.directions.directions);
+    const filteredArray = useaAppSelector(state => state.directions.mainFilteredArray);
+    const filteringValues = useaAppSelector(state => state.directions.mainFilteringValues);
     const [value, setValue] = useState('');
-    const dispath = useAppDispatch();
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         if(directions.length) {
-            setValue(directions[0].name);
-            dispath(updateSearchValue(directions[0].name));
+            dispatch(updateMainFilteredArray(arrayFiltering(directions, filteringValues)));
         }
-    }, [directions]);
+    }, [directions, filteringValues]);
+
+    useEffect(() => {
+        if(filteredArray.length) {
+            setValue(filteredArray[0].name);
+            dispatch(updateSearchValue(filteredArray[0].name));
+        }
+    }, [filteredArray]);
 
     function handleSelect(event: ChangeEvent<HTMLSelectElement>) {
         setValue(event.target.value);
-        dispath(updateSearchValue(event.target.value));
+        dispatch(updateSearchValue(event.target.value));
+    };
+
+    function handleMainFilteringValues(typeArr: string[]) {
+        dispatch(updateMainFilteringValues(typeArr));
     };
 
     return (
         <>
-        <FilterButtons/>
+        <FilterButtons filteringValues={handleMainFilteringValues} />
         <br/>
         <select value={value} onChange={handleSelect}>
-            {directions.length && directions.map((item) => (
+            {filteredArray.length && filteredArray.map((item) => (
                 <option key={item.code}>{item.name}</option>
             ))}
         </select>

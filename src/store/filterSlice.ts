@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface FilterItem {
     code: string,
@@ -11,11 +11,17 @@ export interface FilterObject {
 }
 
 interface FilterType {
-    filter: FilterObject[]
+    filter: FilterObject[],
+    toArr?: FilterItem[],
+    secondFilteringValues: string[],
+    secondFilteredArray: FilterItem[]
 }
 
 const initialState: FilterType = {
-    filter: []
+    filter: [],
+    toArr: [],
+    secondFilteringValues: [],
+    secondFilteredArray: []
 }
 
 export const filterFetch = createAsyncThunk(
@@ -34,7 +40,17 @@ export const filterFetch = createAsyncThunk(
 const filterSlice = createSlice({
     name: "filter",
     initialState,
-    reducers: {},
+    reducers: {
+        updateToArr(state, action: PayloadAction<FilterItem[] | undefined>) {
+            state.toArr = action.payload;
+        },
+        updateSecondFilteringValues(state, action: PayloadAction<string[]>) {
+            state.secondFilteringValues = action.payload;
+        },
+        updateSecondFilteredArray(state, action: PayloadAction<FilterItem[]>) {
+            state.secondFilteredArray = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(filterFetch.fulfilled, (state, action) => {
@@ -42,5 +58,7 @@ const filterSlice = createSlice({
         })
     }
 })
+
+export const {updateToArr, updateSecondFilteringValues, updateSecondFilteredArray} = filterSlice.actions;
 
 export default filterSlice.reducer;

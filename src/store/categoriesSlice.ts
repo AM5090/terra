@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 interface CategoriesItem {
     categoryName: string,
     categoryId: string,
-    categoryType: [] | string[],
+    categoryType: string[],
 }
 
 interface CategoriesType {

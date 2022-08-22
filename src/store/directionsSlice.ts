@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface DirectionsItem {
     code: string,
@@ -7,10 +7,14 @@ export interface DirectionsItem {
 
 interface DirectionsType {
     directions: DirectionsItem[];
+    mainFilteringValues: string[];
+    mainFilteredArray: DirectionsItem[];
 }
 
 const initialState: DirectionsType = {
-    directions: []
+    directions: [],
+    mainFilteringValues: [],
+    mainFilteredArray: []
 }
 
 export const directionsFetch = createAsyncThunk<DirectionsItem[], undefined, {rejectValue: string}>(
@@ -29,7 +33,14 @@ export const directionsFetch = createAsyncThunk<DirectionsItem[], undefined, {re
 const directionsSlice = createSlice({
     name: "directions",
     initialState,
-    reducers: {},
+    reducers: {
+        updateMainFilteringValues(state, action: PayloadAction<string[]>) {
+            state.mainFilteringValues = action.payload;
+        },
+        updateMainFilteredArray(state, action: PayloadAction<DirectionsItem[]>) {
+            state.mainFilteredArray = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
         .addCase(directionsFetch.fulfilled, (state, action) => {
@@ -37,5 +48,7 @@ const directionsSlice = createSlice({
         })
     }
 })
+
+export const {updateMainFilteringValues, updateMainFilteredArray} = directionsSlice.actions;
 
 export default directionsSlice.reducer;

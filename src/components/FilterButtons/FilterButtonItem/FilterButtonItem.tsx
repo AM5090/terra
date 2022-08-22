@@ -3,14 +3,15 @@ interface IFilterButtonProps {
     catigoryName: string,
     id: string,
     active: string,
-    setActive: (value: string) => void
+    setActive: (value: string) => void,
+    filteringValues: (value: string[]) => void
 }
 
-export function FilterButtonItem({catigoryType, catigoryName, id, active, setActive}: IFilterButtonProps) {
+export function FilterButtonItem({catigoryType, catigoryName, id, active, setActive, filteringValues}: IFilterButtonProps) {
 
     function handleClick(event: any) {
-        console.log(catigoryType);
         setActive(event.target.value);
+        filteringValues(catigoryType);
     }
 
     return (

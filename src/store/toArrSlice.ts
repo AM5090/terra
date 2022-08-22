@@ -17,12 +17,12 @@ const toArrSlice = createSlice({
     name: "toArr",
     initialState,
     reducers: {
-        updateToArr(state, action: PayloadAction<ToArrItem[] | undefined>) {
+        oldUpdateToArr(state, action: PayloadAction<ToArrItem[] | undefined>) {
             state.toArr = action.payload;
         }
     }
 });
 
-export const {updateToArr} = toArrSlice.actions;
+export const {oldUpdateToArr} = toArrSlice.actions;
 
 export default toArrSlice.reducer;

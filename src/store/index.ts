@@ -11,7 +11,6 @@ const store = configureStore({
         directions: directionsReducer,
         filter: filterReducer,
         searchValue: searchValueReducer,
-        toArr: toArrReducer,
     }
 })
 
