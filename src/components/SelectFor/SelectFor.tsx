@@ -1,5 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import { updateMainFilteredArray, updateMainFilteringValues } from '../../store/directionsSlice';
+import { updateSecondFilteringValues } from '../../store/filterSlice';
 import { useaAppSelector, useAppDispatch } from '../../store/hook';
 import { updateSearchValue } from '../../store/searchValueSlice';
 import { arrayFiltering } from '../../utils/arrayFiltering';

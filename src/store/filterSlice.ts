@@ -14,14 +14,12 @@ interface FilterType {
     filter: FilterObject[],
     toArr?: FilterItem[],
     secondFilteringValues: string[],
-    secondFilteredArray: FilterItem[]
 }
 
 const initialState: FilterType = {
     filter: [],
     toArr: [],
     secondFilteringValues: [],
-    secondFilteredArray: []
 }
 
 export const filterFetch = createAsyncThunk(
@@ -46,9 +44,6 @@ const filterSlice = createSlice({
         },
         updateSecondFilteringValues(state, action: PayloadAction<string[]>) {
             state.secondFilteringValues = action.payload;
-        },
-        updateSecondFilteredArray(state, action: PayloadAction<FilterItem[]>) {
-            state.secondFilteredArray = action.payload;
         }
     },
     extraReducers: (builder) => {
@@ -59,6 +54,6 @@ const filterSlice = createSlice({
     }
 })
 
-export const {updateToArr, updateSecondFilteringValues, updateSecondFilteredArray} = filterSlice.actions;
+export const {updateToArr, updateSecondFilteringValues} = filterSlice.actions;
 
 export default filterSlice.reducer;

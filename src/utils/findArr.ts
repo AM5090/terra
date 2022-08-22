@@ -6,11 +6,10 @@ export function findArr(searchValue: string, arr: FilterObject[], filteringValue
     const toArr = arr.find((item) => item.from.name.trim() === searchValue.trim())?.to;
 
     if(filteringValues.length && toArr?.length) {
-        const a = arrayFiltering(toArr, filteringValues);
-        console.log('a', a);
-        return a;
+        const arr = arrayFiltering(toArr, filteringValues);
+        return arr;
     }
 
-    console.log('toArr', toArr);
+    
     return toArr;
 }
